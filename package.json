@@ -1,0 +1,20 @@
+{
+  "name": "sinhala-poem-metaphors-search-app",
+  "version": "1.0.0",
+  "description": "This is a mini project done for CS4642 Data Mining module.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "type": "module"
+}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+            crossorigin="anonymous"
+        />
+        <script
+            src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"
+        ></script>
+        <link rel="stylesheet" href="/css/styles.css" />
+        <title>SINPOMET Catalog</title>
+    </head>
+    <body>
+        <h1>SINPOMET Catalog</h1>
+        <form class="form-inline" method="get">
+            <input
+                class="form-control mr-sm-2"
+                type="text"
+                placeholder="Search"
+                aria-label="Search"
+                name="query"
+                value="<%= (typeof query !== "undefined" && query) ? query : '' %>"
+            />
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+                Search
+            </button>
+        </form>
+    </body>
+
+    <% if ( typeof results !== "undefined" && results.length > 0 ) { %>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">poem_name</th>
+                <th scope="col">poet</th>
+                <th scope="col">line</th>
+                <th scope="col">metaphor_present</th>
+                <th scope="col">metaphorical_terms</th>
+                <th scope="col">source_domain</th>
+                <th scope="col">target_domain</th>
+                <th scope="col">interpretation</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (result of results) { %>
+            <tr>
+                <th scope="row"><%= result.poem_name %></th>
+                <td><%= result.poet %></td>
+                <td><%= result.line %></td>
+                <td><%= result.metaphor_present ? "YES" : "NO" %></td>
+                <td><%= result.metaphorical_terms %></td>
+                <td><%= result.source_domain %></td>
+                <td><%= result.target_domain %></td>
+                <td><%= result.interpretation %></td>
+            </tr>
+            <% } %>
+        </tbody>
+    </table>
+    <% } %>
+</html>
