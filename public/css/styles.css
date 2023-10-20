@@ -1,3 +1,11 @@
-h1 {
-    
+body {
+    padding: 10px
+}
+
+#results-table {
+    margin-top: 20px;
+}
+
+form {
+    padding: 20px;
 }
