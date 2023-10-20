@@ -83,6 +83,24 @@ All the above information is provided in Sinhala. The current [corpus](https://g
 
 To query the corpus of data, you can use `query_string` type queries in Elasticsearch ([Read more](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html)). Enter the query in the textbox and press Enter or click the Search button.
 
+Few example queries:
+
+1. Find the metaphors using `අම්මා` as `source_domain`.
+
+    ```source_domain:අම්මා```
+
+2. Find the poems written by `සිරි ගුණසිංහ`.
+
+    ```poet:"සිරි ගුණසිංහ"```
+
+3. Find metaphors having `කරදර` as `source_domain` and `ගින්දර` as `target_domain`
+
+    ```source_domain:කරදර AND target_domain:ගින්දර```
+
+4. Find metaphors having the word `ජීවිතය` in their `interpretation`
+
+    ```interpretation:ජීවිතය```
+
 To ease the process of querying, a synonym filter is added. When enabled (by ticking the checkbox in the UI), the user does not need to give the exact same word in the corpus. Even if a synonym is given, documents that have synonyms to that word will be returned in results.
 
 For example, if a query like `source_domain:මව` is executed along with synonym filter enabled, it will match documents containing synonyms to `මව`. 
