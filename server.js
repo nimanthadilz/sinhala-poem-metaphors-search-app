@@ -1,4 +1,5 @@
 import express from "express";
+import "dotenv/config";
 
 const app = express();
 const port = 3000;
@@ -11,7 +12,7 @@ app.get("/", async (req, res) => {
     const query = req.query.query;
     const useSynonymFilter = req.query.useSynonymFilter;
     if (query == null || query == "") {
-        res.render("index", { form: {}, results: []});
+        res.render("index", { form: {}, results: [] });
     } else {
         console.log("query: ", query);
 
@@ -45,7 +46,12 @@ function runQuery(queryString, useSynonymFilter) {
         body.query.query_string.analyzer = "syn_analyzer";
     }
 
-    return fetch("http://localhost:9200/sinhala-poem-metaphors/_search", {
+    const ES_URL = process.env.ES_URL;
+    if (ES_URL == undefined) {
+        console.error("ES_URL is not defined.")
+        return [];
+    }
+    return fetch(ES_URL + "/_search", {
         method: "post",
         body: JSON.stringify(body),
         headers: {
