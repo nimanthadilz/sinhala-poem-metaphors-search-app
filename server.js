@@ -7,17 +7,22 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 
 app.get("/", async (req, res) => {
+    // console.log(req.query);
     const query = req.query.query;
+    const useSynonymFilter = req.query.useSynonymFilter;
     if (query == null || query == "") {
-        res.render("index");
+        res.render("index", { form: {}, results: []});
     } else {
         console.log("query: ", query);
 
-        const queryResponse = await runQuery(query);
+        const queryResponse = await runQuery(query, useSynonymFilter == "yes");
         console.log("queryResponse", queryResponse);
 
         res.render("index", {
-            query: query,
+            form: {
+                query: query,
+                useSynonymFilter: useSynonymFilter,
+            },
             results: queryResponse,
         });
     }
@@ -27,7 +32,7 @@ app.listen(port, () => {
     console.log(`App listening on port ${port}`);
 });
 
-function runQuery(queryString) {
+function runQuery(queryString, useSynonymFilter) {
     const body = {
         query: {
             query_string: {
@@ -35,6 +40,11 @@ function runQuery(queryString) {
             },
         },
     };
+
+    if (useSynonymFilter) {
+        body.query.query_string.analyzer = "syn_analyzer";
+    }
+
     return fetch("http://localhost:9200/sinhala-poem-metaphors/_search", {
         method: "post",
         body: JSON.stringify(body),
